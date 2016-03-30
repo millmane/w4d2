@@ -1,0 +1,33 @@
+
+
+<% if @cat.persisted? %>
+  <form action = "/cats/<%=@cat.id%>" method = "POST">
+    <input type="hidden" name="_method" value="PATCH">
+<% else %>
+  <form action = "/cats" method = "POST">
+<% end %>
+
+  <p>Make a new cat!</p>
+
+  <p><label for="cat_name">Name</label>
+  <input type = "text" name = cat[name] id = "cat_name" value = <%= @cat.name %>></p>
+
+  <p> <label for="cat_birthdate">Birthdate</label>
+      <input type = "date" name = cat[birthdate] id = "cat_birthdate" value = <%= @cat.birthdate %>></p>
+
+  <p> <label for="cat_color">Color</label>
+      <input type = "text" name = cat[color] id = "cat_color" value = <%= @cat.color %>></p>
+
+  <p> <label> Sex </label>
+  <p><input type = "radio" name = cat[sex] id="cat_sex_female" value = "F"
+      <% if @cat.sex == "F"%> checked = "checked" <% end %> >
+  <label for="cat_sex_female">Female</label></p>
+  <p><input type = "radio" name = cat[sex] id="cat_sex_male" value = "M"
+      <% if @cat.sex == "M"%> checked = "checked" <% end %> >
+  <label for="cat_sex_male">Male</label></p>
+
+  <p> <label for="cat_description">Description</label>
+      <textarea name = cat[description] id = "cat_description"><%= @cat.description %></textarea></p>
+
+      <input type="submit" value="Submit cat">
+</form>

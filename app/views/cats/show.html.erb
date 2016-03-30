@@ -1,0 +1,28 @@
+
+<table>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Color</th>
+      <th>Birthdate</th>
+      <th>Sex</th>
+      <th>Description</th>
+      <th>Rental Requests</th>
+    </tr>
+    <tr>
+      <th><%= @cat.name %></th>
+      <th><%= @cat.age %></th>
+      <th><%= @cat.color %></th>
+      <th><%= @cat.birthdate %></th>
+      <th><%= @cat.sex %></th>
+      <th><%= @cat.description %></th>
+      <th>
+        <% @cat.cat_rental_requests.order(:start_date).each do |request| %>
+        <p><%= "#{request.start_date} -  #{request.end_date}" %></p>
+        <% if request.status == "PENDING" %>
+          <%= button_to "approve", cat_rental_request_path(request.id), method: :patch, params: {status: "APPROVED", id: request.id} %>
+          <%= button_to "deny", cat_rental_request_path(request.id), method: :patch, params: {status: "DENIED", id: request.id} %>
+        <% end %>
+        <% end %>
+      </th>
+    </tr>
